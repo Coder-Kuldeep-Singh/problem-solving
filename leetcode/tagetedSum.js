@@ -15,12 +15,7 @@
 // Input: nums = [3,3], target = 6
 // Output: [0,1]
 
-
-
-
-
-
-
+// method one takes 212 ms to return indexes
 function TargetedSum(arr, target) {
     var sum = 0;
     var index = [];
@@ -41,7 +36,35 @@ function TargetedSum(arr, target) {
     }
 }
 
+// method two takes 184 ms to return indexes
+function TargetedSumMethodTwo(nums, target) {
+    for (var idx = 0; idx < nums.length; idx++) {
+        for (var i = 1 + idx; i < nums.length; i++) {
+            if (idx == i) {
+                continue;
+            }
+            if (target == (nums[idx] + nums[i])) {
+                return new Array(idx, i);
+            }
+
+        }
+    }
+}
+
+// method 3
+function TargetedSumMethodThree(nums, target) {
+    for (var idx = 0; idx < nums.length; idx++) {
+        for (var i = 1 + idx; i < nums.length; i++) {
+            if (nums[i] == (target - nums[idx])) {
+                return new Array(idx, i);
+            }
+        }
+    }
+}
+
+
+
 var arr = [3, 4, 22, 23, 445, 56, 2];
-var targetSum = 5;
-var indexes = TargetedSum(arr, targetSum);
-console.log(`Indexes---${indexes}`);
+var targetSum = 25;
+var indexes = TargetedSumMethodThree(arr, targetSum);
+console.log(`Indexes---[${indexes}]`);
